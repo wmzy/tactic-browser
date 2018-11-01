@@ -3,12 +3,20 @@ module.exports = {
   env: {
     node: true
   },
-  extends: ["plugin:vue/essential", "@vue/prettier"],
+  plugins: ['prettier'],
+  extends: [
+    'plugin:vue/recommended',
+    '@vue/airbnb',
+    'eslint-config-prettier'
+  ],
   rules: {
-    "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off"
+    'prettier/prettier': ['error'],
+    'no-return-assign': ['error', 'except-parens'],
+    'no-shadow': 'off',
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   },
   parserOptions: {
-    parser: "babel-eslint"
+    parser: 'babel-eslint'
   }
-};
+}
