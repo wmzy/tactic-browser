@@ -13,10 +13,17 @@
 </template>
 
 <script>
+import io from 'socket.io-client';
 import GameTable from '@/components/GameTable.vue';
 
 export default {
   components: {GameTable},
+  created() {
+    this.socket = io(window.location.origin);
+  },
+  destroyed() {
+    this.socket.close();
+  },
   methods: {
     handleCreateClick() {
       this.$router.push({path: '/rooms/1'});
