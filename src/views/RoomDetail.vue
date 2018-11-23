@@ -5,10 +5,11 @@
   >
     <v-layout>
       <v-flex>
-        <v-btn @click="handleCreateClick">新建</v-btn>
+        info
       </v-flex>
     </v-layout>
-    <game-table />
+    <game-table v-if="state === 'playing'" />
+    <v-progress-linear v-else :indeterminate="true" />
   </v-container>
 </template>
 
@@ -18,15 +19,31 @@ import GameTable from '@/components/GameTable.vue';
 
 export default {
   components: {GameTable},
+  data() {
+    return {
+      state: 'playing',
+      gameState: {}
+    };
+  },
   created() {
-    this.socket = io(window.location.origin);
+    const token = 'xxx';
+    this.socket = io({
+      path: window.location.pathname,
+      query: {token}
+    });
+
+    this.socket.on('state', this.handleStateChange);
+    this.socket.on('game-state', this.handleStateChange);
   },
   destroyed() {
     this.socket.close();
   },
   methods: {
-    handleCreateClick() {
-      this.$router.push({path: '/rooms/1'});
+    handleStateChange(state) {
+      this.state = state;
+    },
+    handleGameStateChange(state) {
+      this.gameState = {...this.gameState, ...state};
     }
   }
 };

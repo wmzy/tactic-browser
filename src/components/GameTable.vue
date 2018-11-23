@@ -41,6 +41,12 @@
 <script>
 export default {
   name: 'GameTable',
+  props: {
+    state: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       width: 0,

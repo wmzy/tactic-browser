@@ -5,18 +5,18 @@
 
       <equipment-area />
     </div>
-    <game-process />
+    <game-progress />
   </div>
 </template>
 
 <script>
-import GameProcess from '@/components/GameProcess.vue';
+import GameProgress from '@/components/GameProgress.vue';
 import EquipmentArea from '@/components/EquipmentArea.vue';
 
 export default {
   name: 'WarriorCard',
   components: {
-    GameProcess,
+    GameProgress,
     EquipmentArea
   },
   props: {

@@ -20,6 +20,7 @@ import Vuetify, {
   VListTileContent,
   VListTileTitle,
   VListTile,
+  VProgressLinear,
   VContainer,
   VContent
 } from 'vuetify/lib';
@@ -50,6 +51,7 @@ Vue.use(Vuetify, {
     VListTileTitle,
     VListTileContent,
     VListTile,
+    VProgressLinear,
     VContainer,
     VContent
   },
