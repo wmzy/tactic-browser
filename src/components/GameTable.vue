@@ -1,41 +1,19 @@
 <template>
-  <v-container 
-    v-resize="handleResize" 
-    fluid
-    class="root"
-  >
-    <v-layout justify-space-between>
-      <v-flex v-for="i in 5" :key="i" xs2>
-        <v-card height="12rem">
-          card
-        </v-card>
-      </v-flex>
-    </v-layout>
-    <v-layout justify-space-between>
-      <v-flex 
-        v-for="i in [1, 3]" 
-        :key="i" 
-        v-bind="{[`order-xs${i}`]: true}"
-        xs2
-      >
-        <v-card height="12rem">
-          ddd
-        </v-card>
-      </v-flex>
-      <v-flex order-xs2 xs4>
-        <v-card height="12rem">
-          t
-        </v-card>
-      </v-flex>
-    </v-layout>
-    <v-layout justify-space-around>
-      <v-flex xs9>
-        <v-card height="12rem">
-          card
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <div v-resize="handleResize" class="root">
+    <v-card v-for="i in 7" :key="i" class="chair">
+      card {{ i }}
+    </v-card>
+    <v-card class="show-area">
+      show area
+    </v-card>
+    <v-card class="user-area">
+      user area
+    </v-card>
+    <v-card class="log">
+      log
+    </v-card>
+
+  </div>
 </template>
 
 <script>
@@ -67,4 +45,50 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.root {
+  height: 100%;
+  min-height: 600px;
+  display: grid;
+  grid-template-rows: repeat(7, 1fr);
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 10px;
+
+  .show-area {
+    grid-column: 2 / 5;
+    grid-row: 3 / 6;
+  }
+
+  .user-area {
+    grid-column: 1 / 7;
+    grid-row: 6 / 8;
+  }
+
+  .log {
+    grid-column: 6;
+    grid-row: 1 / 6;
+  }
+
+  .chair {
+    grid-row: span 2;
+  }
+
+  .chair:first-child {
+    grid-column: 1 / 2;
+    grid-row: 4 / 6;
+  }
+
+  .chair:nth-child(2) {
+    grid-column: 1 / 2;
+    grid-row: 2 / 4;
+  }
+
+  .chair:nth-child(6) {
+    grid-column: 5 / 6;
+    grid-row: 2 / 4;
+  }
+  .chair:nth-child(7) {
+    grid-column: 5 / 6;
+    grid-row: 4 / 6;
+  }
+}
 </style>
