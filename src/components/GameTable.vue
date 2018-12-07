@@ -1,15 +1,19 @@
 <template>
-  <div v-resize="handleResize" class="root">
-    <v-card v-for="i in 7" :key="i" class="chair">
+  <div :class="s.root">
+    <v-card v-for="i in 7" :key="i" :class="s.chair">
       card {{ i }}
     </v-card>
-    <v-card class="show-area">
+    <v-card :class="s.showArea">
       show area
     </v-card>
-    <v-card class="user-area">
-      user area
-    </v-card>
-    <v-card class="log">
+    <div :class="s.userArea">
+      <equipment-area :class="s.equipmentArea" v-bind="equipment" />
+      <div :class="s.cardArea">
+        <game-card v-for="(c, i) in cards" :key="i" v-bind="c" />
+      </div>
+      <div :class="s.warriorAard" />
+    </div>
+    <v-card :class="s.log">
       log
     </v-card>
 
@@ -17,34 +21,45 @@
 </template>
 
 <script>
+import GameCard from './GameCard.vue';
+import EquipmentArea from './EquipmentArea.vue';
+
 export default {
   name: 'GameTable',
+  components: {
+    GameCard,
+    EquipmentArea
+  },
   props: {
+    role: {
+      type: String,
+      required: true
+    },
+    warrior: {
+      type: String,
+      required: true
+    },
+    equipment: {
+      type: Object,
+      default: null
+    },
+    cards: {
+      type: Array,
+      required: true
+    },
+    otherPlayers: {
+      type: Array,
+      required: true
+    },
     state: {
       type: Object,
       required: true
-    }
-  },
-  data() {
-    return {
-      width: 0,
-      height: 0
-    };
-  },
-  mounted() {
-    this.handleResize();
-  },
-  methods: {
-    handleResize() {
-      const {width, height} = this.$el.getBoundingClientRect();
-      this.width = width;
-      this.height = height;
     }
   }
 };
 </script>
 
-<style scoped lang="scss">
+<style module="s" lang="scss">
 .root {
   height: 100%;
   min-height: 600px;
@@ -61,6 +76,23 @@ export default {
   .user-area {
     grid-column: 1 / 7;
     grid-row: 6 / 8;
+
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 10px;
+
+    .equipment-area {
+      grid-column: 1 / 2;
+    }
+
+    .card-area {
+      grid-column: span 4;
+      display: block;
+    }
+
+    .warrior-card {
+      grid-column: 6 / 7;
+    }
   }
 
   .log {

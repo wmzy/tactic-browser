@@ -1,5 +1,5 @@
 <template>
-  <div class="root">
+  <div :class="s.root">
     <div>
       {{ name }}
 
@@ -28,5 +28,5 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style module="s" lang="scss">
 </style>

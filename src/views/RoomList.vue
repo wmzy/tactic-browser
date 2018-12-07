@@ -1,5 +1,5 @@
 <template>
-  <div class="root">
+  <div>
     <v-btn @click="handleCreateClick">新建</v-btn>
   </div>
 </template>

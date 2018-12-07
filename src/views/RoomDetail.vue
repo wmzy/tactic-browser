@@ -1,14 +1,13 @@
 <template>
   <v-container 
     fluid 
-    class="root"
   >
     <v-layout>
       <v-flex>
         info
       </v-flex>
     </v-layout>
-    <game-table v-if="state === 'playing'" />
+    <game-table v-if="state === 'playing'" :cards="cards" :equipment="equipment" />
     <v-progress-linear v-else :indeterminate="true" />
   </v-container>
 </template>
@@ -22,6 +21,23 @@ export default {
   data() {
     return {
       state: 'playing',
+      cards: [
+        {
+          rank: 11,
+          suit: 'heart',
+          name: '杀',
+          type: 'base'
+        }
+      ],
+      equipment: {
+        weapon: {
+          name: '诸葛连弩',
+          type: 'equipment',
+          distance: 1,
+          suit: 'club',
+          rank: 1
+        }
+      },
       gameState: {}
     };
   },
