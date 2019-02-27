@@ -72,6 +72,20 @@
         prepend-inner-icon="search"
       />
       <v-spacer />
+      <div v-if="user.username">{{ user.username }}</div>
+      <v-dialog v-else>
+        <v-btn slot="activator">登录</v-btn>
+        <v-card>
+          <v-form>
+            <v-text-field
+              v-model="user.username"
+              :counter="10"
+              label="Name"
+              required
+            />
+          </v-form>
+        </v-card>
+      </v-dialog>
     </v-toolbar>
     <v-content>
       <v-container 
@@ -86,8 +100,11 @@
 </template>
 
 <script>
+import user from '@/stores/user';
+
 export default {
   data: () => ({
+    user,
     drawer: null
   }),
   created() {

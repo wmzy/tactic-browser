@@ -1,7 +1,7 @@
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
+import axios from 'axios';
 import Vue from 'vue';
 import Vuetify, {
-  VApp, // required
   VCard,
   VLayout,
   VNavigationDrawer,
@@ -22,7 +22,10 @@ import Vuetify, {
   VListTile,
   VProgressLinear,
   VContainer,
-  VContent
+  VContent,
+  VDialog,
+  VForm,
+  VApp // required
 } from 'vuetify/lib';
 import {Ripple, Resize} from 'vuetify/lib/directives';
 import 'vuetify/src/stylus/app.styl';
@@ -30,9 +33,10 @@ import App from './App.vue';
 import router from './router';
 import './registerServiceWorker';
 
+axios.defaults.baseURL = process.env.VUE_APP_API;
+
 Vue.use(Vuetify, {
   components: {
-    VApp,
     VCard,
     VLayout,
     VNavigationDrawer,
@@ -53,7 +57,10 @@ Vue.use(Vuetify, {
     VListTile,
     VProgressLinear,
     VContainer,
-    VContent
+    VContent,
+    VDialog,
+    VForm,
+    VApp
   },
   directives: {
     Ripple,

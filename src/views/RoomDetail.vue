@@ -14,10 +14,17 @@
 
 <script>
 import io from 'socket.io-client';
+import user from '@/stores/user';
 import GameTable from '@/components/GameTable.vue';
 
 export default {
   components: {GameTable},
+  props: {
+    id: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       state: 'playing',
@@ -43,9 +50,14 @@ export default {
   },
   created() {
     const token = 'xxx';
-    this.socket = io({
-      path: window.location.pathname,
-      query: {token}
+    const {username} = user;
+    this.socket = io(process.env.VUE_APP_API, {
+      path: 'io',
+      query: {
+        roomId: this.id,
+        token,
+        username
+      }
     });
 
     this.socket.on('state', this.handleStateChange);
